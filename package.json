@@ -14,9 +14,11 @@
     "build:dev": "npm run build && yalc push",
     "build:cjs": "tsc --module commonjs --outDir lib/csj",
     "build:esm": "tsc --module esnext --outDir lib/esm",
-    "build:css": "npm run tailwind:build && npm run sass",
-    "tailwind:build": "npx tailwindcss -i ./src/styles/index.scss --config tailwind.config.js -o ./src/styles/index.out.scss",
-    "sass": "npx sass  --no-source-map src/styles/index.out.scss lib/esm/styles/index.css"
+    "build:css": "npm run tailwind:build && npm run css:build:custom && npm run sass && npm run css:build:cleanup",
+    "tailwind:build": "npx tailwindcss -i ./src/styles/tailwind.scss --config tailwind.config.js -o ./src/styles/tailwind.style.scss",
+    "css:build:custom": "npx sass --no-source-map src/styles/custom.scss:src/styles/custom.style.scss",
+    "sass": "npx sass  --no-source-map src/styles/index.scss lib/esm/styles/index.css",
+    "css:build:cleanup": "rm src/styles/custom.style.scss && rm src/styles/tailwind.style.scss"
   },
   "devDependencies": {
     "react-app-rewired": "^2.2.1",
