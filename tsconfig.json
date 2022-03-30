@@ -26,8 +26,9 @@
   },
   "include": [
     "src"
-  ],
+, "app"  ],
   "exclude": [
+    "app/client.tsx",
     "node_modules"
   ]
 }
