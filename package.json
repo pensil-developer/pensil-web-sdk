@@ -1,6 +1,6 @@
 {
   "name": "@pensil-inc/web-sdk",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": false,
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "types": "./lib/esm/index.d.ts",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "npm run build:esm && npm run build:cjs && npm run build:css",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:css && npm run export:assets",
     "build:dev": "npm run build && yalc push",
     "build:cjs": "tsc --module commonjs --outDir lib/csj",
     "build:esm": "tsc --module esnext --outDir lib/esm",
@@ -18,7 +18,8 @@
     "tailwind:build": "npx tailwindcss -i ./src/styles/tailwind.scss --config tailwind.config.js -o ./src/styles/tailwind.style.scss",
     "css:build:custom": "npx sass --no-source-map src/styles/custom.scss:src/styles/custom.style.scss",
     "sass": "npx sass  --no-source-map src/styles/index.scss lib/esm/styles/index.css",
-    "css:build:cleanup": "rm src/styles/custom.style.scss && rm src/styles/tailwind.style.scss"
+    "css:build:cleanup": "rm src/styles/custom.style.scss && rm src/styles/tailwind.style.scss",
+    "export:assets": "cp -r src/assets lib/esm/assets"
   },
   "devDependencies": {
     "react-app-rewired": "^2.2.1",

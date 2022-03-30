@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PensilService } from '../../../services';
 import { PostModel } from '../../../types';
 import { withPensilWrapper } from '../../hoc/pensil-app.wrapper';
+import file from "../../../assets/file.png";
 
 interface SectionDetailProps {
     service: PensilService;
@@ -43,6 +44,7 @@ function SectionDetailComponent(props: SectionDetailProps) {
     return (
         <div className="SectionDetail">
             Hello
+            <img src={file} alt=""/>
             {group ? group.name : props.groupId}
             {
                 posts.map((post: PostModel, index) => (
