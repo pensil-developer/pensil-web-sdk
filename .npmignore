@@ -13,9 +13,13 @@
 /build
 /dist
 
+# remove source from npm package
 /src
 /app
 /public
+config-overrides.js
+tailwind.config.js
+tsconfig.json
 
 # misc
 .DS_Store
