@@ -43,7 +43,7 @@ function SectionDetailComponent(props: SectionDetailProps) {
 
     return (
         <div className="SectionDetail">
-            Hello
+            <div className="text-theme-primary">Hello</div>
             <img src={file} alt=""/>
             {group ? group.name : props.groupId}
             {
