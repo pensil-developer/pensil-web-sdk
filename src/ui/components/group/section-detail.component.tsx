@@ -48,7 +48,7 @@ function SectionDetailComponent(props: SectionDetailProps) {
             {group ? group.name : props.groupId}
             {
                 posts.map((post: PostModel, index) => (
-                    <div key={index} className="pensiltw-bg-green-500">
+                    <div key={index} className="bg-green-500">
                         {post.title}
                         {post.description}
                     </div>

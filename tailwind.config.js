@@ -1,5 +1,5 @@
 module.exports = {
-  "prefix": "pensiltw-",
+  // "prefix": "pensiltw-",
   content: [
     './src/ui/**/*.tsx',
   ],
