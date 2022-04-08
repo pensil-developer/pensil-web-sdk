@@ -1,5 +1,5 @@
 export class EndpointService {
-    private baseUrl = 'https://api.pensil.in/api/';
+    private baseUrl = process.env.REACT_APP_PENSIL_COMMUNITY_BASE_URL;
 
     constructor(baseUrl?: string) {
         if (baseUrl) {
