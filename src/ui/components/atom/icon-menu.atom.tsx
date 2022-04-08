@@ -1,7 +1,6 @@
 import cx from "classnames";
 import React, { useEffect, useState } from "react";
 import UIcon from "./uicon.atom";
-// import UIcon from "./uicon-component";
 
 export const ActionType = Object.freeze({
   default: "default",
@@ -27,7 +26,6 @@ function IconMenu({
 }: Props) {
   const [active, setActive] = useState<Boolean>(false);
 
-  
   const itemList = actions.filter((i) => i.label);
 
   useEffect(() => {
@@ -61,7 +59,8 @@ function IconMenu({
         if (onClick != null) {
           onClick(e);
         }
-      }}>
+      }}
+    >
       <div className={"flex items-center place-content-center"}>
         <span
           className={cx({
@@ -72,7 +71,8 @@ function IconMenu({
             if (itemList.length !== 0) {
               setActive(!active);
             }
-          }}>
+          }}
+        >
           <UIcon
             icon="menu-dots-vertical"
             className={cx(
@@ -94,7 +94,8 @@ function IconMenu({
               className={cx(
                 "dropdown border theme-bg-surface theme-border-default shadow rounded py-2 w-40 ",
                 dropdownClassName
-              )}>
+              )}
+            >
               <div className="flex flex-col">
                 {actions.map((action, index) => (
                   <ActionButton
@@ -129,13 +130,14 @@ function ActionButton({ action, setActive }: { action: any; setActive: any }) {
         setActive(false);
       }}
       className={cx(
-        "p-2 px-4 theme-text-default rounded hover:theme-bg-default flex  space-x-4",
+        "p-2 px-4 theme-text-default rounded hover:theme-bg-default flex  space-x-4 items-center",
         {
           "theme-text-default": action.actionType === ActionType.default,
           "theme-text-primary": action.actionType === ActionType.primary,
           "theme-text-danger": action.actionType === ActionType.alert,
         }
-      )}>
+      )}
+    >
       <UIcon icon={action.icon} solid={action.solidIcon} />
       <p>{action.label}</p>
     </button>

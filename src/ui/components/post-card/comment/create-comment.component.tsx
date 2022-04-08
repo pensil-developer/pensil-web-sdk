@@ -15,7 +15,7 @@ interface CreateCommentProps {
   user?: CreatedBy;
   service: PensilService;
   isSubComment: boolean;
-  commentId: String;
+  commentId?: String;
   community: any;
   updatePost: (post: PostModel) => void;
 }
@@ -28,7 +28,6 @@ interface CreateCommentProps {
 export default function CreateComment({
   service,
   post,
-  user,
   updatePost,
   isSubComment = false,
   commentId,
@@ -51,14 +50,14 @@ export default function CreateComment({
   rows = rows > 0 ? rows : 1;
 
   // if no user, dont show the comment box
-  if (!user) {
-    return <></>;
-  }
+  // if (!user) {
+  //   return <></>;
+  // }
 
   return (
     <>
       <div className="CreateComment pt-2">
-        <div className="flex items-start border  theme-border-default rounded theme-bg-default">
+        <div className="flex items-start border  theme-border-default rounded theme-bg-default items-center">
           {/* <textarea
                 type="text"
                 ref={textAreaElement}
@@ -77,7 +76,9 @@ export default function CreateComment({
           <RichTextEditor
             className="RichEditorComment w-full"
             text={description}
-            // setText={setDescription}
+            setText={(val:string):void => {
+              setDescription(val);
+            }}
             placeholder={isSubComment ? "Post Reply" : "Post Comment"}
             showInfoText={false}
           />
@@ -122,7 +123,7 @@ export default function CreateComment({
             ) : (
               <>
                 <IconButton
-                  icon="img"
+                  icon="picture"
                   //   img="/assets/images/create-post/attachment.png"
                   //   iconSmall
                   onClick={() => {
@@ -130,7 +131,7 @@ export default function CreateComment({
                   }}
                 />
                 <IconButton
-                  icon="send-message"
+                  icon="paper-plane"
                   hoverable={false}
                   //   iconSmall
                   onClick={async () => {
@@ -203,7 +204,7 @@ export default function CreateComment({
                         let { commentReply: commentReply } =
                           await service.services.post.addCommentReply(
                             post.id,
-                            commentId,
+                            commentId!,
                             { description: finalSubComment }
                           );
 
@@ -212,7 +213,7 @@ export default function CreateComment({
                           commentReply = (
                             await service.services.post.uploadDocumentToCommentReply(
                               post.id,
-                              commentId,
+                              commentId!,
                               commentReply.id,
                               subDocument
                             )
@@ -223,7 +224,7 @@ export default function CreateComment({
                           commentReply = (
                             await service.services.post.uploadDocumentToCommentReply(
                               post.id,
-                              commentId,
+                              commentId!,
                               commentReply.id,
                               images
                             )
@@ -234,7 +235,7 @@ export default function CreateComment({
                           commentReply = (
                             await service.services.post.uploadDocumentToCommentReply(
                               post.id,
-                              commentId,
+                              commentId!,
                               commentReply.id,
                               videos
                             )

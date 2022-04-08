@@ -11,6 +11,7 @@ import PostTags from "./post-tags.component";
 import PostVideo from "./post-videos.components";
 import PostProcessing from "./post-processing.component";
 import PostActions from "./post-actions.compoenent";
+import CreateComment from "./comment/create-comment.component";
 
 interface PostCardProps {
   service: PensilService;
@@ -27,7 +28,7 @@ function PostCardComponent(props: PostCardProps) {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const post = props.post;
   return (
-    <div className="PostCard rounded shadow theme-bg-surface px-4 pt-4">
+    <div className="PostCard rounded shadow theme-bg-surface p-4">
       {post.event ? (
         <PostEventInfo event={post.event} user={post.createdBy} />
       ) : (
@@ -73,6 +74,14 @@ function PostCardComponent(props: PostCardProps) {
         setCommentsLoading={function (_: boolean): void {
           throw new Error("Function not implemented.");
         }}
+      />
+      <CreateComment
+        post={post}
+        service={props.service}
+        isSubComment={false}
+        commentId={undefined}
+        community={undefined}
+        updatePost={props.updatePost}
       />
       <PostProcessing isProcessing={isProcessing} />
     </div>

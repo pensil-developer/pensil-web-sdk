@@ -8,7 +8,7 @@ import BalloonEditor from "@chaharshubhamsingh/ckeditor5-custom-build";
 
 export default function RichTextEditor({
   text = "<p>Hi, guys!</p>",
-  setText = function (_: String) {},
+  setText = function (_: string) {},
   getMentionsFeed = async () => {
     return [];
   },
