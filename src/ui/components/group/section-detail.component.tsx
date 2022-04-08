@@ -1,61 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { PensilService } from '../../../services';
-import { PostModel } from '../../../types';
-import { withPensilWrapper } from '../../hoc/pensil-app.wrapper';
-import file from "../../../assets/file.png";
-
+import React, { useState } from "react";
+import UseGroupDetail from "../../../hooks/group/use-group-detail.hook";
+import usePaginatedSectionPost from "../../../hooks/section/use-paginated-section-post.hook";
+import { PensilService } from "../../../services";
+import { PostModel } from "../../../types";
+import { withPensilWrapper } from "../../hoc/pensil-app.wrapper";
+import PostCard from "../post/post-card.component";
 interface SectionDetailProps {
-    service: PensilService;
-    children?: any;
-    communityId?: string;
-    groupId: string;
-    sectionId: string;
+  service: PensilService;
+  children?: any;
+  communityId?: string;
+  groupId: string;
+  sectionId: string;
 }
 
 function SectionDetailComponent(props: SectionDetailProps) {
 
-    // get the group
-    const [group, setGroup] = useState<any>(null);
-    const [posts, setPosts] = useState([]);
+  const { group } = UseGroupDetail(props.service.services.group, props.groupId);
 
-    useEffect(() => {
-        // get group details
-        props.service.services.group.getGroupDetail(props.groupId).then((response) => {
-            setGroup(response.groups);
-        }).catch((err) => {
-            console.error("err fetching group", err);
-        });
-    }, [])
+  const { posts, isLoadingPosts, isLoadingMorePosts } = usePaginatedSectionPost(
+    props.service.services.group,
+    props.groupId,
+    props.sectionId,
+    group
+  );
 
-    useEffect(() => {
-        if (group) {
-            props.service.services.group.getSectionPostsPaginated(props.groupId, props.sectionId)
-                .then(res => {
-                    setPosts(res.posts);
-                })
-                .catch(err => {
-                    console.log("err fetching posts", err);
-                });
-        }
-    }, [group]);
+  const [isUpdated, setIsPostsUpdated] = useState<Boolean>(false);
 
-
-
-    return (
-        <div className="SectionDetail">
-            <div className="text-theme-primary">Hello</div>
-            <img src={file} alt=""/>
-            {group ? group.name : props.groupId}
-            {
-                posts.map((post: PostModel, index) => (
-                    <div key={index} className="bg-green-500">
-                        {post.title}
-                        {post.description}
-                    </div>
-                ))
-            }
+  return (
+    <div className="SectionDetail">
+      {isLoadingPosts ? (
+        <div className="flex items-center justify-center h-full">Loading..</div>
+      ) : posts && posts?.length > 0 ? (
+        <>
+          {posts &&
+            posts.map((post: PostModel, index) => (
+              <div key={index} className="my-4">
+                <PostCard
+                  service={props.service}
+                  groupId={props.groupId}
+                  sectionId={props.sectionId}
+                  post={post}
+                  updatePost={function (post: PostModel): void {
+                    // Update post
+                    posts[index] = post;
+                    console.log("updatePost", post);
+                    setIsPostsUpdated(!isUpdated);
+                  }}
+                  deletePost={function (_: PostModel): void {
+                    posts.splice(index, 1);
+                    setIsPostsUpdated(!isUpdated);
+                  }}
+                />
+              </div>
+            ))}
+          {isLoadingMorePosts && (
+            <div className="flex items-center justify-center">Loading more</div>
+          )}
+        </>
+      ) : (
+        <div className="flex items-center justify-center h-full">
+          No Post available
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
 const SectionDetail = withPensilWrapper(SectionDetailComponent);

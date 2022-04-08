@@ -22,13 +22,15 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+
   },
   "include": [
     "src"
 , "app"  ],
   "exclude": [
     "app/client.tsx",
-    "node_modules"
+    "node_modules",
   ]
 }

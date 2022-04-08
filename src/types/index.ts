@@ -1,1 +1,1 @@
-export { PostModel } from "./post.type";
+export { PostModel,CreatedBy,Event } from "./post.type";

@@ -1,4 +1,18 @@
+@font-face {
+    font-family: "uicons-regular-rounded";
+    src: url("../assets/font-icon/uicons-regular-rounded.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "uicons-solid-rounded";
+    src: url("../assets/font-icon/uicons-solid-rounded.woff") format("woff");
+  }
+
 .pensil-web-sdk {
     @import "tailwind.style";
     @import "custom.style";
+    @import 'theme';
+    @import 'regular-uicons';
+    @import 'solid-uicons';
 }
+

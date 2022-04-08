@@ -1,0 +1,178 @@
+/* theme related changes */
+
+.theme-bg-primary {
+    background-color: var(--pensil-theme-primary-color);
+}
+
+.theme-bg-default {
+  background-color: var(--pensil-theme-background-color);
+}
+
+.theme-bg-surface {
+  background-color: var(--pensil-theme-surface-color);
+}
+
+.theme-bg-on-surface {
+  background-color: var(--pensil-theme-on-surface-color);
+}
+
+.theme-bg-disable {
+  background-color: var(--pensil-theme-disabled-color);
+}
+
+.theme-bg-danger {
+  background-color: var(--pensil-theme-danger-color);
+}
+
+.theme-bg-success {
+  background-color: var(--pensil-theme-success-color);
+}
+
+.theme-bg-info {
+  background-color: var(--pensil-theme-info-color);
+}
+
+.theme-bg-warning {
+  background-color: var(--pensil-theme-warning-color);
+}
+/* Light background color*/
+.theme-bg-primary-light {
+  background-color: var(--pensil-theme-primary-color-light);
+}
+
+.theme-bg-heading-1 {
+  background-color: var(--pensil-theme-heading-1-text-color);
+}
+
+.theme-bg-heading-2 {
+  background-color: var(--pensil-theme-heading-2-text-color);
+}
+
+.theme-bg-subtitle-1 {
+  background-color: var(--pensil-theme-subtitle-1-text-color);
+}
+
+.theme-bg-subtitle-2 {
+  background-color: var(--pensil-theme-subtitle-2-text-color);
+}
+
+/* Text Theme */
+.theme-text-default {
+  color: var(--pensil-theme-default-text-color);
+}
+
+.theme-text-primary {
+  color: var(--pensil-theme-primary-color);
+}
+
+.theme-text-on-primary {
+  color: var(--pensil-theme-on-primary-color);
+}
+
+.theme-text-background {
+  color: var(--pensil-theme-background-color);
+}
+
+.theme-text-heading-1 {
+  color: var(--pensil-theme-heading-1-text-color);
+}
+
+.theme-text-heading-2 {
+  color: var(--pensil-theme-heading-2-text-color);
+}
+
+.theme-text-subtitle-1 {
+  color: var(--pensil-theme-subtitle-1-text-color);
+}
+
+.theme-text-subtitle-2 {
+  color: var(--pensil-theme-subtitle-2-text-color);
+}
+
+.theme-text-danger {
+  color: var(--pensil-theme-danger-color);
+}
+
+.theme-text-success {
+  color: var(--pensil-theme-success-color);
+}
+
+.theme-text-info {
+  color: var(--pensil-theme-info-color);
+}
+
+.theme-text-warning {
+  color: var(--pensil-theme-warning-color);
+}
+
+/* Border */
+.theme-border-primary {
+  border-color: var(--pensil-theme-primary-color);
+}
+
+.theme-border-default {
+  border-color: var(--pensil-theme-border-color);
+}
+
+.theme-border-danger {
+  border-color: var(--pensil-theme-danger-color);
+}
+
+.theme-border-heading-1 {
+  border-color: var(--pensil-theme-heading-1-text-color);
+}
+
+.theme-border-heading-2 {
+  border-color: var(--pensil-theme-heading-2-text-color);
+}
+
+.theme-border-subtitle-1 {
+  border-color: var(--pensil-theme-subtitle-1-text-color);
+}
+
+.theme-border-subtitle-2 {
+  border-color: var(--pensil-theme-subtitle-2-text-color);
+}
+
+/* Hover Background  */
+.hover\:theme-bg-default:hover {
+  background-color: var(--pensil-theme-background-color);
+}
+
+.hover\:theme-bg-primary-light:hover {
+  background-color: var(--pensil-theme-primary-light-color);
+}
+
+.hover\:theme-bg-disable:hover {
+  background-color: var(--pensil-theme-disabled-color);
+}
+
+/* Hover Border */
+.hover\:theme-border-default:hover {
+  border-color: var(--pensil-theme-border-color);
+}
+
+.hover\:theme-border-primary:hover {
+  border-color: var(--pensil-theme-primary-color);
+}
+
+.hover\:theme-border-primary-light:hover {
+  border-color: var(--pensil-theme-primary-light-color);
+}
+
+/* Hover text */
+.hover\:theme-text-heading-1:hover {
+  border-color: var(--pensil-theme-heading-1-text-color);
+}
+
+.hover\:theme-text-heading-2:hover {
+  border-color: var(--pensil-theme-heading-2-text-color);
+}
+
+.hover\:theme-text-subtitle-1:hover {
+  border-color: var(--pensil-theme-subtitle-1-text-color);
+}
+
+.hover\:theme-text-subtitle-2:hover {
+  border-color: var(--pensil-theme-subtitle-2-text-color);
+}
