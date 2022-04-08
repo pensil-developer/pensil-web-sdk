@@ -449,7 +449,7 @@ export class PostService {
      * @param {*} commentId
      * @returns
      */
-    public async addCommentReply(postId: String, commentId: String, description: String) {
+    public async addCommentReply(postId: String, commentId: String, description: { description: String }) {
         return axios
             .post(this.endpointService.getEndpoints().post.addCommentReply(postId, commentId), description, {
                 headers: {

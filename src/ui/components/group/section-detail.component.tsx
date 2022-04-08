@@ -4,7 +4,7 @@ import usePaginatedSectionPost from "../../../hooks/section/use-paginated-sectio
 import { PensilService } from "../../../services";
 import { PostModel } from "../../../types";
 import { withPensilWrapper } from "../../hoc/pensil-app.wrapper";
-import PostCard from "../post/post-card.component";
+import PostCard from "../post-card";
 interface SectionDetailProps {
   service: PensilService;
   children?: any;
