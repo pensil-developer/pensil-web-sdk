@@ -262,3 +262,86 @@
   padding-top: 56.25%;
   /* Aspect ratio 16/9 */
 }
+
+.CreateComment input {
+  padding-right: 36px;
+  flex-grow: 1;
+}
+.CreateComment textarea {
+  resize: none;
+}
+.CreateComment .preview-image {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: 1rem;
+  position: relative;
+}
+.CreateComment .preview-image .remove {
+  position: absolute;
+  border-radius: 50%;
+  background-color: red;
+  width: 21px;
+  height: 21px;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  top: -8px;
+  right: -8px;
+  display: flex;
+}
+.CreateComment .preview-video {
+  max-width: 350px;
+  margin-top: 1rem;
+  position: relative;
+}
+.CreateComment .preview-video .remove {
+  position: absolute;
+  border-radius: 50%;
+  background-color: red;
+  width: 21px;
+  height: 21px;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  top: -8px;
+  right: -8px;
+  display: flex;
+}
+.CreateComment .selectedDocumentPreview .remove {
+  position: absolute;
+  border-radius: 50%;
+  background-color: red;
+  width: 21px;
+  height: 21px;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+.CreateComment .comment-button {
+  flex-shrink: 0;
+}
+
+.PostComment {
+  word-break: break-word;
+  position: relative;
+}
+.PostComment .processing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fffa;
+}

@@ -34,10 +34,17 @@ export interface CreatedBy {
     isFollowedByMe: boolean;
 }
 
-interface Reactions {
-    total: number;
-    details: any[];
-}
+export interface Reactions {
+    total: number
+    details: Detail[]
+  }
+  
+  export interface Detail {
+    emoji: string
+    count: number
+    isByMe: boolean
+    users:CreatedBy[]
+  }
 
 interface LatestComment {
     id: string;
@@ -94,6 +101,21 @@ export interface EventCreatedBy {
     isFollowedByMe: boolean;
 }
 
+export interface Reply {
+    id: string
+    description: string
+    reactions: Reactions
+    createdBy: CreatedBy
+    documents: Document[]
+    images: string[]
+    isByMe: boolean
+    createdAt: string
+  }
+  export interface Document {
+    _id: string
+    location: string
+    name: string
+  }
 
 export interface PostModel {
     id: string;
@@ -126,9 +148,13 @@ export interface PostModel {
     isByMe: boolean;
     isBookmarkedByMe: boolean;
     event: Event;
+    comments:PostModel[];
+    replies:Reply[];
     createdBy: CreatedBy;
+    reactions: Reactions;
     createdAt: Date;
     canDelete: boolean;
     canDeleteComment: boolean;
     canDeleteReply: boolean;
 }
+

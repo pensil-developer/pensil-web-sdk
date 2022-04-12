@@ -6,7 +6,7 @@ import Loader from "../../atom/loader.atom";
 // @ts-ignore
 import TurndownService from "turndown";
 import RichTextEditor from "../../form-control/rich-text-editor.component";
-
+import PostDocumentPreview from "../post-document-preview.component";
 
 const tds = new TurndownService();
 
@@ -57,7 +57,7 @@ export default function CreateComment({
   return (
     <>
       <div className="CreateComment pt-2">
-        <div className="flex items-start border  theme-border-default rounded theme-bg-default items-center">
+        <div className="flex items-start border  theme-border-default rounded theme-bg-default">
           {/* <textarea
                 type="text"
                 ref={textAreaElement}
@@ -76,7 +76,7 @@ export default function CreateComment({
           <RichTextEditor
             className="RichEditorComment w-full"
             text={description}
-            setText={(val:string):void => {
+            setText={(val: string): void => {
               setDescription(val);
             }}
             placeholder={isSubComment ? "Post Reply" : "Post Comment"}
@@ -87,31 +87,33 @@ export default function CreateComment({
             type="file"
             className="hidden"
             ref={imageElement}
-            onChange={(_) => {
+            onChange={(e) => {
               // check if file is image?
-              //   const file = e.target.files[0];
-              //   if (file) {
-              //     if (isSubComment) {
-              //       setVideos([]);
-              //       setImages([]);
-              //       setSubDocument([]);
-              //       if (file.type.startsWith("image")) {
-              //         setImages([file]);
-              //       } else if (file.type.startsWith("video")) {
-              //         setVideos([file]);
-              //       } else {
-              //         setSubDocument([file]);
-              //       }
-              //     } else {
-              //       setDocument(null);
-              //       setImages([]);
-              //       if (file.type.startsWith("image")) {
-              //         setImages([file]);
-              //       } else {
-              //         setDocument(file);
-              //       }
-              //     }
-              //   }
+              if (e != null && e.target != null && e.target.files != null) {
+                const file = e.target.files[0] ?? null;
+                if (file) {
+                  if (isSubComment) {
+                    setVideos([]);
+                    setImages([]);
+                    setSubDocument([]);
+                    if (file.type.startsWith("image")) {
+                      setImages([file]);
+                    } else if (file.type.startsWith("video")) {
+                      setVideos([file]);
+                    } else {
+                      setSubDocument([file]);
+                    }
+                  } else {
+                    setDocument(null);
+                    setImages([]);
+                    if (file.type.startsWith("image")) {
+                      setImages([file]);
+                    } else {
+                      setDocument(file);
+                    }
+                  }
+                }
+              }
             }}
           />
           {/* controls */}
@@ -123,20 +125,16 @@ export default function CreateComment({
             ) : (
               <>
                 <IconButton
-                  icon="picture"
-                  //   img="/assets/images/create-post/attachment.png"
-                  //   iconSmall
+                  icon="clip"
                   onClick={() => {
-                    // if (imageElement.current) imageElement.current.click();
+                    if (imageElement.current) imageElement.current.click();
                   }}
                 />
                 <IconButton
                   icon="paper-plane"
                   hoverable={false}
-                  //   iconSmall
                   onClick={async () => {
                     // create comment
-
                     if (!description) {
                       return window.alert("Comment text is required!");
                     }
@@ -252,7 +250,7 @@ export default function CreateComment({
                           }, 0);
                         }
                         setIsPosting(false);
-                        console.log("Do Update comment")
+                        console.log("Do Update comment");
                         // updatePost(commentReply, commentId);
                         return;
                       } catch (error) {
@@ -325,14 +323,16 @@ export default function CreateComment({
             </span>
           </div>
         ) : (
-          //   <SelectedDocumentPreview
-          //     document={document}
-          //     isSubComment={isSubComment}
-          //     subDocument={subDocument}
-          //     setDocument={setDocument}
-          //     setSubDocument={setSubDocument}
-          //   />
-          <></>
+          <>
+            <PostDocumentPreview
+              document={document}
+              isSubComment={isSubComment}
+              subDocument={subDocument}
+              setDocument={setDocument}
+              setSubDocument={setSubDocument}
+            />
+            <></>
+          </>
         )}
       </div>
     </>

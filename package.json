@@ -46,6 +46,7 @@
     "@types/ckeditor": "^4.9.10",
     "axios": "^0.26.1",
     "classnames": "^2.2.6",
+    "emoji-picker-react": "^3.4.4",
     "moment": "^2.29.2",
     "react-linkify": "*",
     "remarkable": "^2.0.1",

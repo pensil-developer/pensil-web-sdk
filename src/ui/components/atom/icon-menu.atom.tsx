@@ -12,7 +12,7 @@ interface Props {
   icon: string;
   onClick?: (e: any) => {};
   className?: string;
-  dropdownClassName: string;
+  dropdownClassName?: string;
   actions: Array<any>;
   hideOnEmpty: boolean;
 }

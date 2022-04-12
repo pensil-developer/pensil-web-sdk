@@ -130,7 +130,7 @@ interface PostImageProps{
     className?: string;
 }
 
-function PostImage({ image, more = 0, className = "" }:PostImageProps) {
+export function PostImage({ image, more = 0, className = "" }:PostImageProps) {
     return (
       <div className={"PostImage p-1 relative h-64"}>
         {more > 0 ? (

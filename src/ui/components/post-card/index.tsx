@@ -12,6 +12,7 @@ import PostVideo from "./post-videos.components";
 import PostProcessing from "./post-processing.component";
 import PostActions from "./post-actions.compoenent";
 import CreateComment from "./comment/create-comment.component";
+import PostComment from "./comment/post-comment";
 
 interface PostCardProps {
   service: PensilService;
@@ -82,6 +83,24 @@ function PostCardComponent(props: PostCardProps) {
         commentId={undefined}
         community={undefined}
         updatePost={props.updatePost}
+      />
+      <PostComment
+        // user={user}
+        post={post}
+        postId={post.id}
+        comment={post.comments != undefined ? post.comments .length > 0 ? post.comments[0] : undefined : undefined}
+        user={post.createdBy}
+        service={props.service}
+        isSubComment={false}
+        community={undefined}
+        updatePost={props.updatePost}
+        updateComment={function (_: PostModel): void {
+          throw new Error("Function not implemented.");
+        }} // group={group}
+        // // updatePost={updatePost}
+        // // areCommentsLoading={areCommentsLoading}
+        // setCommentsLoading={setAreCommentsLoading}
+        // setAreCommentsLoading={setAreCommentsLoading}
       />
       <PostProcessing isProcessing={isProcessing} />
     </div>

@@ -269,3 +269,90 @@
 .eventBannerImage{
     padding-top: 56.25%; /* Aspect ratio 16/9 */
 }
+
+
+.CreateComment {
+    input {
+        padding-right: 36px;
+        flex-grow: 1;
+    }
+    textarea {
+        resize: none;
+    }
+    .preview-image {
+        max-width: 150px;
+        max-height: 150px;
+        margin-top: 1rem;
+        position: relative;
+        .remove {
+            position: absolute;
+            border-radius: 50%;
+            background-color: red;
+            width: 21px;
+            height: 21px;
+            color: white;
+            font-size: 24px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            top: -8px;
+            right: -8px;
+            display: flex;
+        }
+    }
+    .preview-video {
+        max-width: 350px;
+        // max-height: 350px;
+        margin-top: 1rem;
+        position: relative;
+        .remove {
+            position: absolute;
+            border-radius: 50%;
+            background-color: red;
+            width: 21px;
+            height: 21px;
+            color: white;
+            font-size: 24px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            top: -8px;
+            right: -8px;
+            display: flex;
+        }
+    }
+    .selectedDocumentPreview .remove {
+        position: absolute;
+        border-radius: 50%;
+        background-color: red;
+        width: 21px;
+        height: 21px;
+        color: white;
+        font-size: 24px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        top: 10px;
+        right: 10px;
+        display: flex; 
+    }
+    .comment-button {
+        flex-shrink: 0;
+    }
+}
+
+.PostComment {
+    word-break: break-word;
+    position: relative;
+    .processing {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fffa;
+    }
+}
