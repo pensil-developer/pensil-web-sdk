@@ -17,7 +17,7 @@ import PostSubComment from "./post-sub-comments.component";
 
 const md = new Remarkable();
 
-interface PostCommentProps {
+interface PostCommentsProps {
   postId: string;
   post: PostModel;
   comment: PostModel | undefined;
@@ -25,7 +25,128 @@ interface PostCommentProps {
   service: PensilService;
   isSubComment: boolean;
   commentId?: String;
+  areCommentsLoading:Boolean;
+  setCommentsLoading: (loading: boolean) => void;
+  setAreCommentsLoading: (loading: boolean) => void;
+  updatePost: (post: PostModel) => void;
+  updateComment: (post: PostModel) => void;
+}
+
+export default function PostComments({
+  user,
+  post,
+  service,
+  updatePost,
+  areCommentsLoading,
+  setCommentsLoading = (_) => {},
+  // @ts-ignore
+  setAreCommentsLoading = (_) => {},
+}: PostCommentsProps) {
+  // @ts-ignore
+  const updateComment = (comment: any, isLatestComment = false) => {
+    // update one comment by if in array of comments
+    if (post.comments) {
+      const newComments = [...post.comments];
+      const index = newComments.findIndex((c) => c.id === comment.id);
+      if (index > -1) {
+        newComments[index] = comment;
+        updatePost({ ...post, comments: newComments });
+      }
+    } else {
+      updatePost({ ...post, latestComment: comment });
+    }
+  };
+
+  // if no comments but we have latest comment, show it
+  if ((!post.comments || post.comments.length === 0) && post.latestComment) {
+    return (
+      <div className="PostComments mt-1">
+        {/* show latest comment */}
+        <PostComment
+          post={post}
+          // group={group}
+          user={user}
+          postId={post.id}
+          comment={post.latestComment}
+          key={post.latestComment.id}
+          isLatestComment={true}
+          updatePost={updatePost}
+          updateComment={(comment) => {
+            updateComment(comment, true);
+          }}
+          service={service}
+          isSubComment={false}
+          community={undefined}
+        />
+        {/* show load more screen, if comment more than one */}
+        {post.commentCount > 1 ? (
+          <div className="my-2">
+            <span
+              className="cursor-pointer text-xs theme-text-primary"
+              onClick={(_) => {
+                // get post comments if not already loaded
+                if (!post.comments && !areCommentsLoading) {
+                  // load comments
+                  setCommentsLoading(true);
+                  service.services.post
+                    .getPostDetail(post.id)
+                    .then((response) => {
+                      // add the comments in post
+                      updatePost(response.post);
+                      setCommentsLoading(false);
+                    })
+                    .catch((err) => {
+                      console.error(err);
+                      setCommentsLoading(false);
+                    });
+                }
+              }}
+            >
+              Load more comment
+            </span>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    );
+  }
+
+  // if no comments, show nothing
+  if (!post.comments || post.comments.length === 0) {
+    return <></>;
+  }
+
+  return (
+    <div className="PostComments mt-1">
+      {/* show all comments */}
+      {post.comments.map((comment) => (
+        <PostComment
+          post={post}
+          user={user}
+          postId={post.id}
+          comment={comment}
+          key={comment.id}
+          updatePost={updatePost}
+          updateComment={updateComment}
+          service={service}
+          isSubComment={false}
+          community={undefined}
+        />
+      ))}
+    </div>
+  );
+}
+interface PostCommentProps {
+  postId: string;
+  post: PostModel;
+  comment: any | undefined;
+  user: CreatedBy;
+  service: PensilService;
+  isSubComment: boolean;
+  commentId?: String;
   community: any;
+  isLatestComment?: boolean;
   updatePost: (post: PostModel) => void;
   updateComment: (post: PostModel) => void;
 }
@@ -35,13 +156,13 @@ interface PostCommentProps {
  * @param {*} param0
  * @returns
  */
-export default function PostComment({
+export function PostComment({
   post,
   user,
-  //   group,
   service,
   comment,
   postId,
+
   updatePost,
   updateComment,
 }: PostCommentProps) {
@@ -255,7 +376,7 @@ export default function PostComment({
             )}
             <PostDocument post={comment} smallMargin />
           </div>
-          <div className="flex justify-between items-center my-2 pb-1.5 pr-2">
+          <div className="hidden justify-between items-center my-2 pb-1.5 pr-2">
             {/* left side icons */}
             <div className="flex items-center space-x-1.5">
               <div onClick={showSubComment}>
@@ -296,7 +417,7 @@ export default function PostComment({
               {/* reactions list */}
               {comment.reactions != undefined &&
                 comment.reactions.details &&
-                comment.reactions.details.map((reaction, index) => (
+                comment.reactions.details.map((reaction: any, index: any) => (
                   <div
                     key={reaction.emoji + reaction.count + index}
                     className={cx(
@@ -337,7 +458,7 @@ export default function PostComment({
                 </span>
               </div>
             ) : (
-              <></>
+              <>No Reply</>
             )}
           </div>
           {subCommentView ? (
@@ -390,7 +511,6 @@ export default function PostComment({
                   commentId={comment.id}
                   isSubComment
                   service={service}
-                  community={undefined}
                 />
               </div>
             </div>

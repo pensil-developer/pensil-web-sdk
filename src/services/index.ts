@@ -1,15 +1,17 @@
 import { GroupService } from "./group.service";
 import { PostService } from "./post.service";
+import { ProfileService } from "./profile-service";
 
 export type PensilServiceConfig = {
     token: string;
     baseUrl?: string;
-    themeData?: PensilThemeData
+    themeData?: PensilThemeData;
 }
 
 interface PensilServices {
     group: GroupService;
     post:PostService
+    profile:ProfileService;
 }
 
 interface PensilThemeData {
@@ -78,13 +80,14 @@ export class PensilService {
         // initialize all the services
         this.services = {
             group: new GroupService(this.config),
-            post: new PostService(this.config)
+            post: new PostService(this.config),
+            profile: new ProfileService(this.config),
         };
         this.init();
     }
 
     /**
-     * Initialises the service
+     * Initializes the service
      */
     private init(): void {
         // if not theme data, get the default values

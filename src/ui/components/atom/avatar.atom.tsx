@@ -11,7 +11,7 @@ interface AvatarProps {
   subCommentAvatar?: boolean;
   bold?: boolean;
   extraInfo?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export function Avatar({
@@ -24,7 +24,7 @@ export function Avatar({
   noName = false,
   bold = true,
   extraInfo,
-  onClick = () => {},
+  onClick,
 }: AvatarProps) {
   return (
     <div className={`${className} flex items-center justify-center`}>

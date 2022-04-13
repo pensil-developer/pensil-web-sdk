@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { PensilService } from "../../../services";
 import { PostModel } from "../../../types";
-import PostImages from "./post-images.component";
+import CreateComment from "./comment/create-comment.component";
+import PostComments from "./comment/post-comment";
 import PostPoll from "./poll-component";
+import PostActions from "./post-actions.compoenent";
 import PostDescription from "./post-description.component";
 import PostDocuments from "./post-documents.component";
 import PostEventInfo from "./post-event-info.component";
 import { PostHeader } from "./post-header.component";
+import PostImages from "./post-images.component";
+import PostProcessing from "./post-processing.component";
 import PostTags from "./post-tags.component";
 import PostVideo from "./post-videos.components";
-import PostProcessing from "./post-processing.component";
-import PostActions from "./post-actions.compoenent";
-import CreateComment from "./comment/create-comment.component";
-import PostComment from "./comment/post-comment";
 
 interface PostCardProps {
   service: PensilService;
@@ -27,6 +27,8 @@ interface PostCardProps {
 
 function PostCardComponent(props: PostCardProps) {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [areCommentsLoading, setAreCommentsLoading] = useState(false);
+
   const post = props.post;
   return (
     <div className="PostCard rounded shadow theme-bg-surface p-4">
@@ -69,38 +71,37 @@ function PostCardComponent(props: PostCardProps) {
         service={props.service}
         groupId={props.groupId}
         sectionId={props.sectionId}
-        areCommentsLoading={false}
+        areCommentsLoading={areCommentsLoading}
         deletePost={props.deletePost}
         updatePost={props.updatePost}
-        setCommentsLoading={function (_: boolean): void {
-          throw new Error("Function not implemented.");
-        }}
+        setCommentsLoading={setAreCommentsLoading}
       />
       <CreateComment
         post={post}
         service={props.service}
         isSubComment={false}
         commentId={undefined}
-        community={undefined}
         updatePost={props.updatePost}
       />
-      <PostComment
+      <PostComments
         // user={user}
         post={post}
         postId={post.id}
-        comment={post.comments != undefined ? post.comments .length > 0 ? post.comments[0] : undefined : undefined}
+        comment={
+          post.comments !== undefined
+            ? post.comments.length > 0
+              ? post.comments[0]
+              : undefined
+            : undefined
+        }
         user={post.createdBy}
         service={props.service}
         isSubComment={false}
-        community={undefined}
         updatePost={props.updatePost}
-        updateComment={function (_: PostModel): void {
-          throw new Error("Function not implemented.");
-        }} // group={group}
-        // // updatePost={updatePost}
-        // // areCommentsLoading={areCommentsLoading}
-        // setCommentsLoading={setAreCommentsLoading}
-        // setAreCommentsLoading={setAreCommentsLoading}
+        updateComment={function (_: PostModel): void {}} // group={group}
+        areCommentsLoading={areCommentsLoading}
+        setCommentsLoading={setAreCommentsLoading}
+        setAreCommentsLoading={setAreCommentsLoading}
       />
       <PostProcessing isProcessing={isProcessing} />
     </div>

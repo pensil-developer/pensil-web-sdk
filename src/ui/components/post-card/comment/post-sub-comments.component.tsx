@@ -145,7 +145,7 @@ export default function PostSubComment({
             )}
           </div>
           {/* post reply reactions */}
-          <div className="flex justify-between items-center">
+          <div className="justify-between items-center">
             {/* left side icons */}
             <div className="flex items-center">
               {/* emoji icon */}

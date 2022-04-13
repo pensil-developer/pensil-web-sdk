@@ -5,7 +5,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 // @ts-ignore
 import BalloonEditor from "@chaharshubhamsingh/ckeditor5-custom-build";
 
-
 export default function RichTextEditor({
   text = "<p>Hi, guys!</p>",
   setText = function (_: string) {},
@@ -14,64 +13,73 @@ export default function RichTextEditor({
   },
   placeholder = "Write something...",
   className = "",
+  displayInnerBorder = false,
   uploadImage = true,
   insertTable = true,
   showInfoText = true,
 }) {
   return (
     <div className={cx("RichTextEditor" + className)}>
-      <CKEditor
-        editor={BalloonEditor}
-        data={text}
-        onReady={() => {
-          // You can store the "editor" and use when it is needed.
-          // console.log('Editor is ready to use!', editor);
-        }}
-        onChange={(_: any, editor: any) => {
-          // set text
-          const data = editor.getData();
-          // setText(html2md(data));
-          setText(data);
-        }}
-        config={{
-          toolbar: {
-            items: [
-              "bold",
-              "italic",
-              "link",
-              "bulletedList",
-              "numberedList",
-              "|",
-              "outdent",
-              "indent",
-              "|",
-              uploadImage ? "uploadImage" : null,
-              "blockQuote",
-              insertTable ? "insertTable" : null,
-              // "mediaEmbed"
-            ],
-            location: "bottom",
-          },
-          placeholder: placeholder,
-          extraPlugins: [MyCustomUploadAdapterPlugin, MentionLinks],
-          mention: {
-            feeds: [
-              {
-                marker: "@",
-                feed: getMentionsFeed,
-                minimumCharacters: 1,
-                itemRenderer: customItemRenderer,
-              },
-            ],
-          },
-        }}
-        onBlur={(event: any, editor: any) => {
-          console.log("Blur.", editor, event);
-        }}
-        onFocus={(event: any, editor: any) => {
-          console.log("Focus.", event, editor);
-        }}
-      />
+      <div
+        className={cx(" ", {
+          "theme-border-default": displayInnerBorder,
+          "border": displayInnerBorder,
+        })}
+      >
+        <CKEditor
+          editor={BalloonEditor}
+          data={text}
+          onReady={() => {
+            // You can store the "editor" and use when it is needed.
+            // console.log('Editor is ready to use!', editor);
+          }}
+          onChange={(_: any, editor: any) => {
+            // set text
+            const data = editor.getData();
+            // setText(html2md(data));
+            setText(data);
+          }}
+          config={{
+            toolbar: {
+              items: [
+                "bold",
+                "italic",
+                "link",
+                "bulletedList",
+                "numberedList",
+                "|",
+                "outdent",
+                "indent",
+                "|",
+                uploadImage ? "uploadImage" : null,
+                "blockQuote",
+                insertTable ? "insertTable" : null,
+                // "mediaEmbed"
+              ],
+              location: "bottom",
+            },
+            placeholder: placeholder,
+            extraPlugins: [MyCustomUploadAdapterPlugin, MentionLinks],
+            mention: {
+              feeds: [
+                {
+                  marker: "@",
+                  feed: getMentionsFeed,
+                  minimumCharacters: 1,
+                  itemRenderer: customItemRenderer,
+                },
+              ],
+            },
+          }}
+          onBlur={(event: any, editor: any) => {
+            console.log("Blur.", editor, event);
+          }}
+          onFocus={(event: any, editor: any) => {
+            console.log("Focus.", event, editor);
+          }}
+        />
+      </div>
+
       {showInfoText ? (
         <span className="theme-text-subtitle-2 text-xs">
           Double click or select text to access formatting options.

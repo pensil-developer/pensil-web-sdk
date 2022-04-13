@@ -66,7 +66,7 @@ export class PostService {
    * @param {*} post
    * @returns
    */
-    public async createPost(post: PostModel) {
+    public async createPost(post: any) {
         return axios
             .post(this.endpointService.getEndpoints().post.create, post, {
                 headers: {
@@ -103,7 +103,7 @@ export class PostService {
     public async uploadImages(
 
         postId: string,
-        images = [],
+        images :any[],
         setPercentComplete = (_: any) => { }
     ) {
         const formData = new FormData();
@@ -151,7 +151,7 @@ export class PostService {
     public async uploadVideos(
 
         postId: string,
-        videos = [],
+        videos :any[],
         setPercentComplete = (_: any) => { }
     ) {
         const formData = new FormData();

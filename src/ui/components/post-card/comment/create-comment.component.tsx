@@ -16,7 +16,6 @@ interface CreateCommentProps {
   service: PensilService;
   isSubComment: boolean;
   commentId?: String;
-  community: any;
   updatePost: (post: PostModel) => void;
 }
 
@@ -54,27 +53,17 @@ export default function CreateComment({
   //   return <></>;
   // }
 
+  if(isSubComment){
+    return <></>;
+  }
+
   return (
     <>
       <div className="CreateComment pt-2">
-        <div className="flex items-start border  theme-border-default rounded theme-bg-default">
-          {/* <textarea
-                type="text"
-                ref={textAreaElement}
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                  window.setTimeout(() => {
-                    e.target.style.height = "auto";
-                    e.target.style.height = e.target.scrollHeight + "px";
-                  }, 0);
-                }}
-                className="px-4 py-2 w-full flex-grow block theme-bg-default"
-                rows={rows}
-                placeholder={isSubComment ? "Post Reply" : "Post Comment"}
-              /> */}
+        <div className="flex items-center border  theme-border-default rounded theme-bg-default">
           <RichTextEditor
             className="RichEditorComment w-full"
+            displayInnerBorder={false}
             text={description}
             setText={(val: string): void => {
               setDescription(val);
@@ -162,15 +151,17 @@ export default function CreateComment({
                             )
                           ).post;
                         }
-
+                        console.log("Uploading new document,", commentId);
                         if (document) {
+                          console.log("Uploading new document,");
                           newPost = (
                             await service.services.post.uploadDocumentToComment(
                               post.id,
                               commentId,
-                              images
+                              document
                             )
                           ).post;
+                          console.log("New Post",newPost);
                         }
 
                         setImages([]);

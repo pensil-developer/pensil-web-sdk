@@ -7,11 +7,15 @@ export class EndpointService {
         }
     }
 
+    
     public getEndpoints() {
 
         const service = this;
 
         return {
+            user: {
+                profile: `${service.baseUrl}/profile`,
+            },
             groupDetail: (groupId: string) => `${service.baseUrl}group/${groupId}`,
             sectionPostsPaginated: (groupId: string, sectionId: string, page = 1) =>
                 service.baseUrl + "group/" + groupId + "/section/" + sectionId + "/posts?page=" + page,
