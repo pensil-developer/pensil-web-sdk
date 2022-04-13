@@ -25,7 +25,7 @@ interface LiveMeeting {
     webUrl: string;
 }
 
-interface CreatedBy {
+export interface CreatedBy {
     id: string;
     name: string;
     userId: string;
@@ -34,10 +34,17 @@ interface CreatedBy {
     isFollowedByMe: boolean;
 }
 
-interface Reactions {
-    total: number;
-    details: any[];
-}
+export interface Reactions {
+    total: number
+    details: Detail[]
+  }
+  
+  export interface Detail {
+    emoji: string
+    count: number
+    isByMe: boolean
+    users:CreatedBy[]
+  }
 
 interface LatestComment {
     id: string;
@@ -50,16 +57,6 @@ interface LatestComment {
     createdAt: Date;
 }
 
-interface LiveMeeting2 {
-    id: string;
-    title?: any;
-    meetingId: string;
-    roomName: string;
-    isLive: boolean;
-    isEnded: boolean;
-    recordings: any[];
-    webUrl: string;
-}
 
 interface Host {
     id: string;
@@ -70,45 +67,55 @@ interface Host {
     isFollowedByMe: boolean;
 }
 
-interface CreatedBy2 {
-    id: string;
-    name: string;
-    userId: string;
-    isVerifiedByPensil: boolean;
-    picture: string;
-    isFollowedByMe: boolean;
-}
 
-interface Event {
+export interface Event {
     id: string;
     title: string;
+    banner: string;
     startTime: Date;
     endTime: Date;
     community: string;
     webURL: string;
+    isBookmarkedByMe: boolean;
     invitedSections: string[];
-    liveMeeting: LiveMeeting2;
+    liveMeeting: LiveMeeting;
     isOnline: boolean;
     maximumRegistrations: number;
     host: Host;
     participantCount: number;
     myRSVPStatus: string;
     myCommunityRole: string;
-    createdBy: CreatedBy2;
+    createdBy: EventCreatedBy;
     createdAt: Date;
     updatedAt: Date;
     location: string;
 }
 
-interface CreatedBy3 {
+export interface EventCreatedBy {
     id: string;
     name: string;
+    groupRole: string;
     userId: string;
     isVerifiedByPensil: boolean;
-    groupRole: string;
     picture: string;
     isFollowedByMe: boolean;
 }
+
+export interface Reply {
+    id: string
+    description: string
+    reactions: Reactions
+    createdBy: CreatedBy
+    documents: Document[]
+    images: string[]
+    isByMe: boolean
+    createdAt: string
+  }
+  export interface Document {
+    _id: string
+    location: string
+    name: string
+  }
 
 export interface PostModel {
     id: string;
@@ -121,6 +128,8 @@ export interface PostModel {
     tab: Tab;
     title: string;
     description: string;
+    document: string;
+    documentName: string;
     liveMeeting: LiveMeeting;
     scheduledTime?: any;
     images: any[];
@@ -139,9 +148,13 @@ export interface PostModel {
     isByMe: boolean;
     isBookmarkedByMe: boolean;
     event: Event;
-    createdBy: CreatedBy3;
+    comments:PostModel[];
+    replies:Reply[];
+    createdBy: CreatedBy;
+    reactions: Reactions;
     createdAt: Date;
     canDelete: boolean;
     canDeleteComment: boolean;
     canDeleteReply: boolean;
 }
+
