@@ -1,6 +1,6 @@
 {
   "name": "@pensil-inc/web-sdk",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "private": false,
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "build:dev": "npm run build && yalc push",
     "build:cjs": "tsc --module commonjs --outDir lib/csj",
     "build:esm": "tsc --module esnext --outDir lib/esm",
-    "build:css": "npm run tailwind:build && npm run css:build:custom && run css:build:theme && npm run sass && npm run css:build:cleanup",
+    "build:css": "npm run tailwind:build && npm run css:build:custom && npm  run css:build:theme && npm run sass && npm run css:build:cleanup",
     "tailwind:build": "npx tailwindcss -i ./src/styles/tailwind.scss --config tailwind.config.js -o ./src/styles/tailwind.style.scss",
     "css:build:custom": "npx sass --no-source-map src/styles/custom.scss:src/styles/custom.style.scss",
     "css:build:theme": "npx sass --no-source-map src/styles/theme.scss:src/styles/theme.style.scss",
