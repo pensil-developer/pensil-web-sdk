@@ -10,7 +10,7 @@
   "types": "./lib/esm/index.d.ts",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "npm run build:esm && npm run build:cjs && npm run build:css && npm run export:assets && npm run export:declarations",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:css && npm run export:assets",
     "build:dev": "npm run build && yalc push",
     "build:cjs": "tsc --module commonjs --outDir lib/csj",
     "build:esm": "tsc --module esnext --outDir lib/esm",
