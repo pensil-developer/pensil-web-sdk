@@ -118,6 +118,9 @@ export class PensilService {
         }
 
         return `
+            .pensil-web-sdk {
+                color: ${this.config.themeData.defaultTextColor};
+            }
             body {
                 --pensil-theme-primary-color: ${this.config.themeData.primaryColor};
                 --pensil-theme-primary-light-color: ${this.config.themeData.primaryLightColor};

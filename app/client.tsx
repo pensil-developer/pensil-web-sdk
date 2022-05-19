@@ -12,11 +12,13 @@ const pensil = new PensilService({
 
 ReactDOM.render(
   <React.StrictMode>
-    <UIKit.SectionDetail
-      service={pensil}
-      groupId={process.env.REACT_APP_PENSIL_COMMUNITY_GROUP_ID}
-      sectionId={process.env.REACT_APP_PENSIL_COMMUNITY_SECTION_ID}
-    />
+    <div style={{ color: "red" }}>
+      <UIKit.SectionDetail
+        service={pensil}
+        groupId={process.env.REACT_APP_PENSIL_COMMUNITY_GROUP_ID}
+        sectionId={process.env.REACT_APP_PENSIL_COMMUNITY_SECTION_ID}
+      />
+    </div>
   </React.StrictMode>,
   document.getElementById("root")
 );
