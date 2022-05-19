@@ -16,7 +16,7 @@ interface CreateCommentProps {
   service: PensilService;
   isSubComment: boolean;
   commentId?: String;
-  updatePost: (post: PostModel) => void;
+  updatePost: (post: PostModel, commentId: String|null) => void;
 }
 
 /**
@@ -52,10 +52,6 @@ export default function CreateComment({
   // if (!user) {
   //   return <></>;
   // }
-
-  if(isSubComment){
-    return <></>;
-  }
 
   return (
     <>
@@ -174,7 +170,7 @@ export default function CreateComment({
                         }
                         setIsPosting(false);
 
-                        updatePost(newPost);
+                        updatePost(newPost,null);
                         return;
                       } catch (error) {
                         setIsPosting(false);
@@ -242,7 +238,7 @@ export default function CreateComment({
                         }
                         setIsPosting(false);
                         console.log("Do Update comment");
-                        // updatePost(commentReply, commentId);
+                        updatePost(commentReply, commentId!);
                         return;
                       } catch (error) {
                         setIsPosting(false);

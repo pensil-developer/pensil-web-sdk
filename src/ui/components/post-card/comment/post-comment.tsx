@@ -25,7 +25,7 @@ interface PostCommentsProps {
   service: PensilService;
   isSubComment: boolean;
   commentId?: String;
-  areCommentsLoading:Boolean;
+  areCommentsLoading: Boolean;
   setCommentsLoading: (loading: boolean) => void;
   setAreCommentsLoading: (loading: boolean) => void;
   updatePost: (post: PostModel) => void;
@@ -193,14 +193,13 @@ export function PostComment({
   const onCommentUpdate = (commentReply: any) => {
     let newSubCommentArr = [...commentRepliesArr, commentReply];
     setCommentRepliesArr(newSubCommentArr);
-    console.log("Replies", newSubCommentArr);
     setSubCommentView(true);
   };
 
   // handle react to comment
   const handleReactToComment = (emoji: any) => {
     service.services.post
-      .addCommentReaction(postId, comment.id, emoji.id)
+      .addCommentReaction(postId, comment.id, emoji)
 
       .then(({ comment }) => {
         // update comment
@@ -376,7 +375,7 @@ export function PostComment({
             )}
             <PostDocument post={comment} smallMargin />
           </div>
-          <div className="hidden justify-between items-center my-2 pb-1.5 pr-2">
+          <div className="flex justify-between items-center my-2 pb-1.5 pr-2">
             {/* left side icons */}
             <div className="flex items-center space-x-1.5">
               <div onClick={showSubComment}>
@@ -458,7 +457,7 @@ export function PostComment({
                 </span>
               </div>
             ) : (
-              <>No Reply</>
+              <></>
             )}
           </div>
           {subCommentView ? (
@@ -474,8 +473,6 @@ export function PostComment({
                   commentRepliesArr.map((reply, index) => (
                     <PostSubComment
                       post={post}
-                      //   group={group}
-                      //   user={user}
                       postId={post.id}
                       commentRepliesArr={commentRepliesArr}
                       comment={comment}
@@ -496,6 +493,7 @@ export function PostComment({
           ) : (
             <></>
           )}
+
           {subCommentView ? (
             <div className="mr-4 pb-3">
               {!subCommentView ? (
@@ -509,7 +507,7 @@ export function PostComment({
                   user={user}
                   updatePost={onCommentUpdate}
                   commentId={comment.id}
-                  isSubComment
+                  isSubComment={true}
                   service={service}
                 />
               </div>
