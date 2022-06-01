@@ -6,7 +6,7 @@ import "@pensil-inc/web-sdk/lib/esm/styles/index.css";
 // this file is meant for testing the sdk only
 
 const pensil = new PensilService({
-  token: process.env.REACT_APP_PENSIL_COMMUNITY_USER_TOKEN,
+  token: "process.env.REACT_APP_PENSIL_COMMUNITY_USER_TOKEN",
   baseUrl: process.env.REACT_APP_PENSIL_COMMUNITY_BASE_URL,
 });
 
